@@ -3,7 +3,7 @@ resource "azurerm_service_plan" "sp" {
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   os_type             = "Linux"
-  sku_name            = "P1v2"
+  sku_name            = "B1"
 }
 
 resource "azurerm_linux_web_app" "wa" {
@@ -30,7 +30,7 @@ resource "azurerm_linux_web_app" "wa" {
 
 resource "azurerm_app_service_source_control" "sc" {
   app_id                 = azurerm_linux_web_app.wa.id
-  repo_url               = "https://github.com/shestakov-dev/bus-timetable-app-backend"
-  branch                 = "main"
+  repo_url               = var.repo_url
+  branch                 = var.repo_branch
   use_manual_integration = false
 }
